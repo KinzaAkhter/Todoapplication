@@ -1,4 +1,4 @@
-// File: C:\Users\acer\TODO_APP\frontend\src\app\layout.tsx
+// File: C:\Users\PMLS\OneDrive\Desktop\hackathon2_todo\TODO_APP\Todoapplication\frontend\src\app\layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

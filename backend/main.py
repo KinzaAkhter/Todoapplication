@@ -8,6 +8,13 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from sqlmodel import SQLModel
+from database.connection import async_engine
+
+# IMPORTANT: import models so SQLModel registers the tables
+from models import User, Task, Conversation, Message
+
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -21,26 +28,28 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 app = FastAPI(title="Todo API", version="1.0.0")
 
 
+@app.on_event("startup")
+async def create_db_tables():
+    async with async_engine.begin() as conn:
+        await conn.run_sync(SQLModel.metadata.create_all)
 
 
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        
         "http://127.0.0.1:3000", "http://localhost:3000",
-        "http://127.0.0.1:57382", 
+        "http://127.0.0.1:57382",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# Include routes
 
-app.include_router(auth_router)               # Auth routes at root level
-app.include_router(tasks_router, prefix="/api")  # Task routes under /api
-# Chat routes already include /api prefix internally
-app.include_router(chat_router)
+# Include routes
+app.include_router(auth_router)                 # Auth routes at root level
+app.include_router(tasks_router, prefix="/api") # Task routes under /api
+app.include_router(chat_router)                 # Chat routes already include /api prefix internally
 
 
 @app.get("/")
