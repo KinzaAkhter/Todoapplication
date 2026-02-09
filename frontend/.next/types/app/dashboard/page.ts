@@ -1,8 +1,8 @@
-// File: C:\Users\PMLS\OneDrive\Desktop\hackathon2_todo\TODO_APP\Todoapplication\frontend\src\app\register\page.tsx
-import * as entry from '../../../../src/app/register/page.js'
+// File: C:\Users\PMLS\OneDrive\Desktop\hackathon2_todo\TODO_APP\Todoapplication\frontend\src\app\dashboard\page.tsx
+import * as entry from '../../../../src/app/dashboard/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../src/app/register/page.js')
+type TEntry = typeof import('../../../../src/app/dashboard/page.js')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{
